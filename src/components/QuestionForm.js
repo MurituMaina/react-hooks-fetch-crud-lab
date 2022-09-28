@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm(props) {
+function QuestionForm() {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -41,7 +41,7 @@ function QuestionForm(props) {
       .catch((error) => {
         console.log("This is the Error!", error);
       });
-      event.target.reset();
+   
   }
 
   return (

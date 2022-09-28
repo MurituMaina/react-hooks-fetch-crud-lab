@@ -153,6 +153,17 @@
       ],
       "correctIndex": 0,
       "id": 14
+    },
+    {
+      "prompt": "Capital City of Kenya",
+      "answers": [
+        "Nairobi",
+        "Kampala",
+        "Mombasa",
+        "Kisumu"
+      ],
+      "correctIndex": 0,
+      "id": 15
     }
   ]
 }

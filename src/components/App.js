@@ -6,17 +6,15 @@ import QuestionList from "./QuestionList";
 function App() {
   const [page, setPage] = useState("List");
   const [questions, setQuestions] = useState([]);
-  const [question, setQuestion] = useState([]);
-  let url = "http://localhost:4000/questions";
-
-  useEffect(() => {
-    fetch(url)
+  // const [question, setQuestion] = useState([]);
+   useEffect(() => {
+    fetch("http://localhost:4000/questions")
       .then((res) => res.json())
       .then((data) => {
         setQuestions(data);
       })
       .catch((err) => console.log(err));
-  }, [url]);
+  }, [questions]);
 
   function deleteQuestion(id) {
     console.log(id);
@@ -27,6 +25,11 @@ function App() {
         "Content-Type": "application/json",
       },
     })
+      .then((res) => res.json())
+      .then(() => {
+        const newQuestions = questions.filter((question) => question.id !== id);
+        setQuestions(...quetionsnewQuestions);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -44,13 +47,11 @@ function App() {
           }
           return question;
         });
-  
-        setQuestions(newQuestions);
+
+        setQuestions(...questions, newQuestions);
       })
       .catch((err) => console.log(err));
   }
- 
-
 
   return (
     <main>
@@ -58,7 +59,11 @@ function App() {
       {page === "Form" ? (
         <QuestionForm />
       ) : (
-        <QuestionList questions={questions} deleteQuestion ={deleteQuestion } updateCorrectAnswer = {updateCorrectAnswer}/>
+        <QuestionList
+          questions={questions}
+          deleteQuestion={deleteQuestion}
+          updateCorrectAnswer={updateCorrectAnswer}
+        />
       )}
     </main>
   );
