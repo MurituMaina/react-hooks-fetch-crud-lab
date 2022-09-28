@@ -19,20 +19,29 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
-
+    console.log(event.target)
     fetch("http://localhost:4000/questions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({
+        prompt: formData.prompt,
+        answers: [
+          formData.answer1,
+          formData.answer2,
+          formData.answer3,
+          formData.answer4,
+        ],
+        correctIndex: formData.correctIndex,
+      }),
     })
       .then((resp) => resp.json())
       .then((data) => console.log("Data submitted!", data))
       .catch((error) => {
         console.log("This is the Error!", error);
       });
+      event.target.reset();
   }
 
   return (
